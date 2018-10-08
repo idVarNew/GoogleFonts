@@ -9,6 +9,7 @@ The main idea of this project is to 'copy' as much functionalities as possible f
 I used Developer API from Google Fonts from https://developers.google.com/fonts/docs/developer_api
 
 The single font looks like this:
+```
  {
    "kind": "webfonts#webfont",
    "family": "Antic",
@@ -24,7 +25,7 @@ The single font looks like this:
     "regular": "http://themes.googleusercontent.com/static/fonts/antic/v4/hEa8XCNM7tXGzD0Uk0AipA.ttf"
    }
   },
-
+```
 
 ## TECHNOLOGIES
  - Angular CLI 6
