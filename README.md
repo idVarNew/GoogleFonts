@@ -1,15 +1,6 @@
 # Profile googlefontsapp
 
-1. If you want to set max-width for the googlefontsapp, please uncomment
-
-  // max-width: 500px; 
-
-in profile-googlefontsapp -> profile-googlefontsapp.component.scss 
-
-
-
------------------------------------------------------------------------
-
+1. 
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
