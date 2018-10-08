@@ -1,0 +1,15 @@
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
+main {
+  padding: 15px;
+}
+
+@include media-breakpoint-up(md) {
+  main {
+    padding: 0 0 50px 0;
+  }
+}
+
+aside {
+  padding: 0 15px;
+}

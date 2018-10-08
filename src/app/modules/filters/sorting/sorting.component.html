@@ -1,0 +1,12 @@
+<label  for="inputGroupSelect01">
+  Sort by</label>
+<div class="input-group mb-3">
+  <select name="sortingFonts" class="custom-select" id="inputGroupSelect01" [(ngModel)]="sorting" 
+  (ngModelChange)="sortFonts($event)">
+    <option value="alpha" selected>alphabetical</option>
+    <option value="popularity">popular</option>
+    <option value="date">date added</option>
+    <option value="trending">trending</option>
+  </select>
+
+</div>

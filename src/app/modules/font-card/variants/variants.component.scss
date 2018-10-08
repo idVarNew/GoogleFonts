@@ -1,0 +1,17 @@
+
+
+.input-group {
+  &-text {
+    border: none;
+    background-color: transparent;
+    padding-left: 0 !important;
+  }
+
+  .custom-select {
+    border: none;
+    border-radius: .25rem;
+    font-size: 12px !important;
+    height: 25px;
+    padding: 0 35px 0 15px;
+  }
+}

@@ -1,0 +1,13 @@
+
+
+<button type="button" placement="left" ngbTooltip="Select this font" class="btn btn-primary float-right btn-selected"
+(click)="addFontToSelected(font, i)" *ngIf="!font.currentState.selected" [ngStyle]="{'width': size+'px', 'height': size+'px'}">
+<i class="fas fa-plus"></i>
+</button>
+
+<button type="button" style="background-color: #fff" placement="left" ngbTooltip="Deselect this font"
+ class="btn btn-primary float-right btn-selected" [ngStyle]="{'width': size+'px', 'height': size+'px'}"
+(click)="removeFontFromSelected(font, i)" *ngIf="font.currentState.selected">
+<i class="fas fa-minus" style="color: #067eff"></i>
+</button>
+

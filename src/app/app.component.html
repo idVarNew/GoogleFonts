@@ -1,0 +1,17 @@
+<div class="container-fluid" [ngStyle]="{'background-color': color}">
+  
+  <header class="main-header">
+    <app-header></app-header>
+  </header>
+
+  <div class="font-list">
+    <div class="row">
+      <aside class="aside col-12 col-md-4 col-lg-3 col-xl-2">
+        <app-aside></app-aside>
+      </aside>
+      <main class="col-12  col-md-8 col-lg-9 col-xl-10">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+</div>

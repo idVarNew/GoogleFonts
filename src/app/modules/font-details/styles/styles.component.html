@@ -1,0 +1,12 @@
+<ng-container *ngIf="fontStyles.length">
+    <b>Font styles:</b> <br>
+    <form>
+      <div *ngFor="let variant of fontStyles; let i = index ">
+        <input type="radio" [id]="font.family + variant" name="style" [checked]="variant === 'normal'" [value]="variant"
+          (click)='selectStyle($event.target.value)'>
+        <label [ngStyle]="{'font-style': variant }" [for]="font.family + variant">
+          {{variant}}
+        </label>
+      </div>
+    </form>
+  </ng-container>

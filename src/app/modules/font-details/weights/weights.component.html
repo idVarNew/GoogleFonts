@@ -1,0 +1,12 @@
+<ng-container *ngIf="fontWeights.length">
+    <b> Font weights:</b> <br>
+    <form>
+      <div *ngFor="let variant of fontWeights; let i = index ">
+        <input type="radio" [id]="font.family + variant" name="weight" [checked]="variant === '400'" [value]="variant"
+          (click)='selectWeight($event.target.value)'>
+        <label [ngStyle]="{'font-weight': variant,'font-family': font.family }" [for]="font.family + variant">
+          {{variant}}
+        </label>
+      </div>
+    </form>
+  </ng-container>

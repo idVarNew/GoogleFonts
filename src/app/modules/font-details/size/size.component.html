@@ -1,0 +1,7 @@
+<div>
+  <label for="sizer1">Change Size</label> <br>
+  <input type="range" class="custom-range" id="sizer1" name="volume" step="1" min="10" max="150" [value]="fontSize"
+    (input)="showCurrentSize($event.target.value)" />
+  {{fontSize}}px
+</div>
+

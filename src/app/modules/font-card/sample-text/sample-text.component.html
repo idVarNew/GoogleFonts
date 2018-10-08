@@ -1,0 +1,14 @@
+<div class="input-group  input-group-sm  mb-1">
+  <div class="input-group-prepend">
+    <label class="input-group-text visuallyhidden" for="sampleText">Preview</label>
+  </div>
+  <select class="custom-select" name="sampleText" id="sampleText" [(ngModel)]="font.currentState.sampleType"
+    (ngModelChange)="selectSampleText($event, font.family)">
+    <option value="word" selected>preview text</option>
+    <option value="sentence">sentence</option>
+    <option value="paragraph">paragraph</option>   
+    <option value="numerals">numerals</option>
+    <option value="polishLetters">polish letters</option>
+    <option value="custom">custom</option>
+  </select>
+</div>

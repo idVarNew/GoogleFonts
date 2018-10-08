@@ -1,0 +1,22 @@
+<div class="card-header bg-transparent">
+  <span class="font-name">{{ font.family }}</span>
+  <small class="card-text text-muted">Styles: {{font.variants.length}}, </small>
+  <small class="card-text text-muted">Lang: {{font.subsets.length}}</small>
+  <app-selection-button [font]="font" (selectEE)="selectFont($event)" [size]="23"></app-selection-button>
+</div>
+
+<div class="card-text options">
+  <app-sample-text [font]="font" (selectSampleEE)="selectSampleText($event)"></app-sample-text>
+  <app-size-options  [font]="font" (changeSizeEE)="changeFontSize($event)" class="size-options"></app-size-options>
+  <app-variants [combineVariants]="combineVariants" (selectVariantToPreviewEE)="selectVariantToPreview($event)"></app-variants>
+</div>
+
+<app-font-preview #fontPreview  [font]="font"></app-font-preview>
+
+<div class="card-footer bg-transparent">
+  <button type="button" class="btn btn-sm btn-link" (click)="applyToAllFonts(font.currentState.sampleText, font.currentState.size, font.currentState.sampleType, font.family)"
+    *ngIf="font.currentState.current">Apply to all</button>
+  <a class="btn btn-sm btn-link " routerLink="/fonts/{{font.family}}">
+    See specimen
+  </a>
+</div>

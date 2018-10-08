@@ -1,0 +1,8 @@
+<div class="input-group mb-3">
+  <input type="text" class="form-control" [(ngModel)]="text" (input)="useCustomTextAsSample(text)" placeholder="type here to preview text"
+    aria-label="Search">
+  <div class="input-group-append">
+    <button *ngIf="text" (click)="resetSampleTextBox(text)" class="btn btn-outline-secondary" type="button" id="button-addon2">x</button>
+  </div>
+</div>
+

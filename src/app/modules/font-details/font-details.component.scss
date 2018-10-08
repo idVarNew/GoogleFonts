@@ -1,0 +1,15 @@
+.font-details {
+  padding: 0 20px;
+  &-preview {
+    line-height: initial;
+  }
+  &-header{
+      padding-top: 25px
+  }
+}
+.options-item{
+    border-bottom: 1px solid #dee2e6;
+    display: block;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+}

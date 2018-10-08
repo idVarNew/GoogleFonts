@@ -1,0 +1,13 @@
+<label for="languages-filter">Languages</label>
+
+<div class="input-group mb-3">
+
+  <select name="languages-filter" class="custom-select" id="languages-filter" [(ngModel)]="defaultLanguage" (ngModelChange)="filterLanguages($event)">
+    <ng-container *ngFor="let variant of allLanguages ">
+      <option [value]="variant" [selected]="variant === 'latin'">
+        {{ variant }} {{ variant=== 'latin-ext' ? '(polish)' : ''}}
+      </option>
+    </ng-container>
+  </select>
+
+</div>

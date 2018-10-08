@@ -1,0 +1,13 @@
+<div class="card-text preview">
+  <h2 class="post-title" contenteditable="true" [ngStyle]="{'font-family': font.family, 'font-size': font.currentState.size +'px', 'font-style':font.currentState.previewVariants.style, 'font-weight': font.currentState.previewVariants.weight }"
+    tabindex="0" [hidden]="font.currentState.sampleType === 'custom'">
+    {{ font.currentState.sampleText }}
+  </h2>
+  <div [hidden]="font.currentState.sampleType !== 'custom'">
+    <h2 [ngStyle]="{'font-family': font.family, 'font-size': font.currentState.size +'px', 'font-style':font.currentState.previewVariants.style, 'font-weight': font.currentState.previewVariants.weight }"
+      (input)="getCustomText(font.currentState.sampleText)" #customTextPreview  contenteditable="true" name="custom-text-input" 
+      [(ngModel)]="font.currentState.sampleText">
+      
+    </h2>
+  </div>
+</div>

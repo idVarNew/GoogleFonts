@@ -1,0 +1,44 @@
+<p>
+  <button type="button" class="btn  btn-block btn-box" (click)="isCollapsed1 = !isCollapsed1" [attr.aria-expanded]="!isCollapsed1"
+    aria-controls="collapseExample" [class.btn-success]="selectedFonts.length" [class.btn-light]="!selectedFonts.length">
+    Your selection: {{selectedFonts.length}} {{selectedFonts.length ===1 ? 'font' : 'fonts'}}
+    <i class="fas fa-angle-down" *ngIf="!isCollapsed1"></i>
+    <i class="fas fa-angle-up" *ngIf="isCollapsed1"></i>
+  </button>
+</p>
+
+<div id="collapseExample1" [ngbCollapse]="!isCollapsed1">
+  <div class="card">
+    <div class="card-body">
+      <app-selected-preview [path]="path" [selectedFonts]="selectedFonts" (removeSelected)="removeFromSelectedFonts($event)" (clearAllSelected)="clearAllSelectedFonts($event)"></app-selected-preview>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="path ==='' ">
+  <p>
+    <button type="button" class="btn btn-light btn-block btn-box" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseExample">
+      Options
+      <i class="fas fa-angle-down" *ngIf="isCollapsed"></i>
+      <i class="fas fa-angle-up" *ngIf="!isCollapsed"></i>
+    </button>
+  </p>
+  <div id="collapseExample" [ngbCollapse]="isCollapsed">
+    <div class="card">
+      <div class="card-body">
+        <app-sample-text #sampleText (resetSampleTextBoxEE)="resetSampleTextBox($event)" (useCustomTextAsSampleEE)="useCustomTextAsSample($event)"></app-sample-text>
+        <app-search #search (searchFontsEE)="searchFonts($event)" (resetSearchBoxEE)="resetSearchBox()"></app-search>
+        <app-category [selectedCategory]="selectedCategory" (sortByEE)="sortFonts($event)" (filterCategoryEE)="filterCategory($event)"></app-category>
+        <app-sorting [sorting]="sorting" (sortFontsEE)="sortFonts($event)"></app-sorting>
+        <app-languages [defaultLanguage]="defaultLanguage" (sortByEE)="sortBy($event)"></app-languages>
+        <app-font-styles [isNumberOfStylesChecked]="isNumberOfStylesChecked" (filterNumberOfStylesEE)="filterNumberOfStyles($event)"
+          (toogleNumberOfstylesEE)="toogleNumberOfstyles()"></app-font-styles>
+
+        <button *ngIf="isChangesMade" class="btn-block btn btn-light" (click)="resetAllFontsSettings()">
+          Reset Settings
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

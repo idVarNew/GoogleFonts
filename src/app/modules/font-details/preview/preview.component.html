@@ -1,0 +1,48 @@
+<ngb-tabset #t="ngbTabset">
+    <ngb-tab id="tab-selectbyid1" title="Paragraph">
+      <ng-template ngbTabContent>
+        <div class="row tab-inner justify-content-end">
+          <div class="col-12 col-md-10 ">
+            <label for="previewText" class="visuallyhidden">Type here to preview text</label>
+            <input type="text" class="preview-text-input" placeholder="Type here to preview text" id="previewText"
+              [(ngModel)]="previewText" value="previewText" (input)="showPreviewText(previewText)">
+            <br>
+            <p [ngStyle]="{'font-family': font.family, 'font-size': fontSize+'px', 'font-weight': fontWeight, 'font-style': fontStyle}"
+              class="font-details-preview" contenteditable="true">
+              {{currentPreviewText}}
+            </p>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="tab-selectbyid3">
+      <ng-template ngbTabTitle>Polish letters</ng-template>
+      <ng-template ngbTabContent>
+        <div class="row tab-inner justify-content-end">
+          <div class="col-12 col-md-10">
+            <p>
+              {{!polishLetters ? "This font does not support polish language" : ""}}
+            </p>
+            <p [ngStyle]="{'font-family': font.family, 'font-size': fontSize+'px', 'font-weight': fontWeight, 'font-style': fontStyle}"
+              class="font-details-preview" contenteditable="true">
+
+              {{!polishLetters ? "" : "ąęłóźćńżł"}}
+            </p>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="tab-selectbyid4">
+      <ng-template ngbTabTitle>Numerals</ng-template>
+      <ng-template ngbTabContent>
+        <div class="row tab-inner justify-content-end">
+          <div class="col-12 col-md-10">
+            <p [ngStyle]="{'font-family': font.family, 'font-size': fontSize+'px', 'font-weight': fontWeight, 'font-style': fontStyle}"
+              class="font-details-preview" contenteditable="true">
+              123456789
+            </p>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>

@@ -1,0 +1,30 @@
+<article *ngIf="font" class="font-details">
+
+  <button routerLink="" class="btn btn-light">BACK</button>
+
+  <header class="font-details-header">
+    <h2 class="d-inline-block">
+      {{font.family}}
+    </h2>
+    <app-selection-button [font]="font" (selectEE)="selectFont($event)" size="45"></app-selection-button>
+  </header>
+
+  <app-intro [font]="font"></app-intro>
+
+  <div class="row options">
+    <div class="col-6 col-md-4">
+      <app-size class="options-item" (showCurrentSizeEE)="showCurrentSize($event)" [fontSize]="fontSize"></app-size>
+      <div class="options-item" >
+        <b> Category: </b>{{font.category}}
+      </div>
+      <app-weights  class="options-item"  (selectWeightEE)="selectWeight($event)" [fontWeights]="fontWeights" [font]="font"></app-weights>
+      <app-styles class="options-item"  (selectStyleEE)="selectStyle($event)" [font]="font" [fontStyles]="fontStyles"></app-styles>
+      <app-languages  class="options-item" [font]="font"></app-languages>
+    </div>
+    <div class="col-12 col-md-8">
+      <app-preview   [font]="font" [fontStyle]="fontStyle"
+        [fontSize]="fontSize" [fontWeight]="fontWeight" 
+       ></app-preview>
+    </div>
+  </div>
+</article>

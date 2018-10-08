@@ -1,0 +1,24 @@
+<div class="styles-filter">
+    <label for="styles-filter" class="">Numbers of styles</label>
+   <br>
+
+  <div class="styles-content">
+    <input type="checkbox" id="styles-filter" class="styles-filter-checkbox"  [checked]="isNumberOfStylesChecked" (change)="toogleNumberOfstyles()" >
+    <div class="w-75 d-inline-block"  *ngIf="!isNumberOfStylesChecked">
+      <span class="fake-range-input">
+        <span class="fake-range-circle"></span>
+      </span>
+    </div>
+    
+    <div class="w-75 d-inline-block" *ngIf="isNumberOfStylesChecked">
+      <input type="range" class="custom-range w-75" [(ngModel)]="currentStylesValue" id="styles-filter" name="volume"
+        (change)="filterNumberOfStyles($event.target.value)" step="1" min="0" max="18" [value]="currentStylesValue"
+        [disabled]="!isNumberOfStylesChecked" />
+     
+      <span class="styles-filter-value"> {{currentStylesValue === 0 ? 'All' : currentStylesValue +"+"}}</span>
+    </div>
+    
+  </div>
+   
+</div>
+

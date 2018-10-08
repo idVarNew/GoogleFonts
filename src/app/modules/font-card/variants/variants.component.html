@@ -1,0 +1,12 @@
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text visuallyhidden" for="combineVariants">Sort by</label>
+  </div>
+  <select name="combineVariants" class="custom-select" id="combineVariants" [(ngModel)]="variant1" (ngModelChange)="selectVariantToPreview($event)">
+    <ng-container *ngFor="let variant of combineVariants">
+      <option [value]="[variant.weight, variant.style]" [selected]="variant.weight === 400">
+        {{ variant.weight}} {{ variant.style}}</option>
+    </ng-container>
+  </select>
+
+</div>

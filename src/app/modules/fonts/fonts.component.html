@@ -1,0 +1,16 @@
+<app-filters-bar [uiState]="uiState" [sortingType]="sortingType">
+</app-filters-bar>
+ 
+<ng-container>
+  <ngx-masonry #masonry [updateLayout]="updateMasonryLayout" [options]="{ transitionDuration: '0.00000000001' }">
+    <ng-container *ngFor="let font of fonts; let i = index">
+    
+      <ngxMasonryItem class="card masonry-item" *ngIf="i< uiState.fonstPerPage && font.currentState.visible" #mor>       
+        <app-font-card (selectToPreviewEE)="selectToPreview()" [font]="font" [i]="i" [uiState]="uiState" (layout)="adjustLayout()"
+          class="card-body"></app-font-card>
+      </ngxMasonryItem>
+    </ng-container>
+  </ngx-masonry>
+</ng-container>
+{{fonts.length === 0 ? 'Nothing was found' : '' }}
+<button type="button" class="btn btn-primary btn-block btn-lg" (click)="loadMoreFontsFonts()" *ngIf="visibleFonts.length >12 ">Load More Fonts</button>

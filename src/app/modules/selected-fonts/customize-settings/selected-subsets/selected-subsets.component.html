@@ -1,0 +1,32 @@
+<div *ngIf="subsets.length > 0" class="all-subsets">
+  <div *ngFor="let subset of subsets; let i = index">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" [id]="'id'+i" (change)="selectSubset(subset, $event)" [disabled]="subset === 'latin'"
+        [checked]="selectedLangSubsets.indexOf(subset) > -1 || subset === 'latin' ">
+      <label class="custom-control-label" [for]="'id'+i">{{subset}}</label>
+    </div>
+  </div>
+</div>
+<form>
+
+  <ng-container>
+    <ngx-masonry>
+      <ng-container *ngFor="let font of selectedFonts; let i = index">
+        <ngxMasonryItem class="masonry-item" *ngIf="i< 10" #mor>
+          <h3>{{font.family}}</h3>
+          <div *ngFor="let subset of font.subsets; let i = index">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" [id]="font.family+subset + i" [checked]="font.currentState.selectedSubsets[subset] || subset === 'latin'"
+                disabled>
+              <label class="custom-control-label" [for]="font.family+subset + i" [class.disbled-label]="variant === 'regular'">
+                {{subset}}</label>
+            </div>
+          </div>
+          <app-remove-font-button [font]="font" (removeFromSelectedFontsEE)="removeFromSelectedFonts($event)"></app-remove-font-button>
+
+        </ngxMasonryItem>
+      </ng-container>
+    </ngx-masonry>
+  </ng-container>
+</form>
+

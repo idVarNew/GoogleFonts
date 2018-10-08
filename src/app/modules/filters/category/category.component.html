@@ -1,0 +1,37 @@
+<form class="category-filter">
+  <p>Categories</p>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="all" value="all" (change)="filterCategory('all'); sortBy('alpha')"
+      name="category" [checked]="selectedCategory === 'all'">
+    <label class="custom-control-label" for="all">All</label>
+  </div>
+
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="serif" value="all" (change)="filterCategory('serif')" name="category"
+      [checked]="selectedCategory === 'serif'">
+    <label class="custom-control-label" for="serif">Serif</label>
+  </div>
+
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="sans-serif" value="sans-serif" (change)="filterCategory('sans-serif')"
+      name="category" [checked]="selectedCategory === 'sans-serif'">
+    <label class="custom-control-label" for="sans-serif">Sans-serif</label>
+  </div>
+
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="handwriting" value="handwriting" (change)="filterCategory('handwriting')"
+      name="category" [checked]="selectedCategory === 'handwriting'">
+    <label class="custom-control-label" for="handwriting">Handwriting</label>
+  </div>
+
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="display" value="display" (change)="filterCategory('display')"
+      name="category" [checked]="selectedCategory === 'display'">
+    <label class="custom-control-label" for="display">Display</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="monospace" value="monospace" (change)="filterCategory('monospace')"
+        name="category" [checked]="selectedCategory === 'monospace'">
+      <label class="custom-control-label" for="monospace">Monospace</label>
+  </div >
+</form>

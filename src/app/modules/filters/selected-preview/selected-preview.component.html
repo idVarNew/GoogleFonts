@@ -1,0 +1,29 @@
+<div *ngIf="selectedFonts">
+  <p class="selected-info font-weight-bold">
+    {{selectedFonts.length}} {{selectedFonts.length ===1 ? 'font' : 'fonts'}} selected
+  </p>
+  <ng-container *ngIf="selectedFonts.length">
+    <ul>
+      <li *ngFor="let selectedFont of selectedFonts">
+        {{selectedFont.family}}
+        <button class="btn btn-light btn-sm btn-remove" (click)="removeFromSelectedFonts(selectedFont.family)">
+          <i class="fas fa-times"></i>
+        </button>
+      </li>
+    </ul>
+    <div class="buttons-group">
+        <ng-container *ngIf="selectedFonts.length >0">
+          <button class="btn btn-light" (click)="clearAllSelectedFonts()">Clear All</button>
+        </ng-container>
+      
+        <ng-container *ngIf="path !=='/selected-fonts' && selectedFonts.length >0">
+          <a class="btn btn-success" routerLink="/selected-fonts" *ngIf="path !=='/selected-fonts'">Embed</a>
+        </ng-container>
+      
+        <ng-container *ngIf="path ==='/selected-fonts'">
+          <a class="btn btn-light" routerLink="/">Back</a>
+        </ng-container>
+      </div>
+  </ng-container>
+</div>
+

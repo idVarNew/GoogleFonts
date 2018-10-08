@@ -1,0 +1,6 @@
+<input type="range" class="custom-range" id="sizer" name="volume" (change)="changeFontSize(font.family, $event.target.value)"
+  step="1" min="8" max="112" [(ngModel)]="size" [value]="font.currentState.size" (input)="showCurrentSize($event.target.value)" />
+
+<span class="current-value">{{size ? defaultSize: this.font.currentState.size}}px</span>
+
+<label for="sizer" class="visuallyhidden">Example range</label>

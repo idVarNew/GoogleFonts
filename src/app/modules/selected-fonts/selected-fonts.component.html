@@ -1,0 +1,11 @@
+<button routerLink="" class="btn btn-light">BACK</button>
+<br><br>
+<h2>
+  Your Selection:   {{selectedFonts.length}}  {{selectedFonts.length ===1 ? 'font' : 'fonts'}} 
+</h2>
+
+<app-generated-links *ngIf="selectedFonts.length >0" [cssImportCode]="cssImportCode" [cssLink]="cssLink" [selectedFonts]="selectedFonts"></app-generated-links>
+
+<app-customize-settings *ngIf="selectedFonts.length>0" [selectedFonts]="selectedFonts" (selectVariantEE)="selectVariant($event)" [selectedLangSubsets]="selectedLangSubsets"
+  [subsets]="subsets" (selectSubsetEE)="selectSubset($event)" (removeFromSelectedFontsEE)="removeFromSelectedFonts($event)">
+</app-customize-settings>

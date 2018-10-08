@@ -1,0 +1,24 @@
+<form>
+  <ng-container>
+    <ngx-masonry>
+      <ng-container *ngFor="let font of selectedFonts; let i = index">
+        <ngxMasonryItem class="masonry-item" *ngIf="i< 10" #mor>
+
+          <h3>{{font.family}}</h3>
+
+          <p>Categories</p>
+          <div *ngFor="let variant of font.variants; let i = index">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" [id]="'variant'+ i+font.family" 
+              (change)="selectVariant(font, variant)" [checked]="font.currentState.selectedVariants[variant]"
+                [disabled]="variant === 'regular' ">
+              <label class="custom-control-label" [for]="'variant'+ i+font.family" [class.disbled-label]="variant === 'regular'">{{variant}}</label>
+            </div>
+          </div>
+          <app-remove-font-button [font]="font" (removeFromSelectedFontsEE)="removeFromSelectedFonts($event)"></app-remove-font-button>
+
+         </ngxMasonryItem>
+      </ng-container>
+    </ngx-masonry>
+  </ng-container>
+</form>

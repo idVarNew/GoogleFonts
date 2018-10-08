@@ -1,0 +1,30 @@
+@import "~bootstrap/scss/bootstrap-grid.scss";
+
+.masonry-item {
+  width: 100%;
+  margin: 0.5%;
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+
+@include media-breakpoint-up(sm) {
+  .masonry-item {
+    width: 49%;
+  }
+}
+@include media-breakpoint-up(xl) {
+  .masonry-item {
+    width: 32%;
+  }
+}
+
+.btn-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 100%;
+  background-color: #fff;
+}
+.all-subsets {
+  padding: 45px 0;
+}

@@ -1,0 +1,16 @@
+<h3>
+  Customize
+</h3>
+<ngb-tabset #t="ngbTabset">
+  <ngb-tab id="tab-selectbyid1" title="Versions">
+    <ng-template ngbTabContent>
+      <app-selected-variants [selectedFonts]="selectedFonts" (selectVariantEE)="selectVariant($event)" (removeFromSelectedFontsEE)="removeFromSelectedFonts($event)"></app-selected-variants>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="tab-selectbyid2">
+    <ng-template ngbTabTitle>Languages</ng-template>
+    <ng-template ngbTabContent>
+      <app-selected-subsets [selectedLangSubsets]="selectedLangSubsets" [subsets]="subsets" [selectedFonts]="selectedFonts" (selectSubsets)="selectSubset($event)" (removeFromSelectedFontsEE)="removeFromSelectedFonts($event)"></app-selected-subsets>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
