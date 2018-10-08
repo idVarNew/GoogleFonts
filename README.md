@@ -1,10 +1,10 @@
-# Profile widget
+# Profile googlefontsapp
 
-1. If you want to set max-width for the widget, please uncomment
+1. If you want to set max-width for the googlefontsapp, please uncomment
 
   // max-width: 500px; 
 
-in profile-widget -> profile-widget.component.scss 
+in profile-googlefontsapp -> profile-googlefontsapp.component.scss 
 
 
 

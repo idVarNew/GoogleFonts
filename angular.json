@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "widget": {
+    "googlefontsapp": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/widget",
+            "outputPath": "dist/googlefontsapp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -55,18 +55,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "widget:build"
+            "browserTarget": "googlefontsapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "widget:build:production"
+              "browserTarget": "googlefontsapp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "widget:build"
+            "browserTarget": "googlefontsapp:build"
           }
         },
         "test": {
@@ -101,7 +101,7 @@
         }
       }
     },
-    "widget-e2e": {
+    "googlefontsapp-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -109,11 +109,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "widget:serve"
+            "devServerTarget": "googlefontsapp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "widget:serve:production"
+              "devServerTarget": "googlefontsapp:serve:production"
             }
           }
         },
@@ -129,5 +129,5 @@
       }
     }
   },
-  "defaultProject": "widget"
+  "defaultProject": "googlefontsapp"
 }
