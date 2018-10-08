@@ -6,8 +6,7 @@
 
           <h3>{{font.family}}</h3>
 
-          <p>Categories</p>
-          <div *ngFor="let variant of font.variants; let i = index">
+         <div *ngFor="let variant of font.variants; let i = index">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" [id]="'variant'+ i+font.family" 
               (change)="selectVariant(font, variant)" [checked]="font.currentState.selectedVariants[variant]"
