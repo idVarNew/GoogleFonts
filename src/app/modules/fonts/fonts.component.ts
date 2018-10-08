@@ -21,7 +21,7 @@ export class FontsComponent implements OnInit {
   fontLoader = true;
   sortingType = '';
 
-  @ViewChild('masonry', { read: ElementRef })
+  @ViewChild('masonry')
   masonry;
 
   constructor(
