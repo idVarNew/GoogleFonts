@@ -4,8 +4,8 @@
 
 LIVE VERSION: http://frontendowiec.com/gf/index.html
 
-[[http://frontendowiec.com/gf/googlefonts.jpg|alt=googlefonts]]
 
+![myimage-alt-tag](http://frontendowiec.com/gf/googlefonts.jpg)
 
 The main idea of this project is to 'copy' as much functionalities as possible from website: https://fonts.google.com/
 
