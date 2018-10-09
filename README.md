@@ -4,6 +4,9 @@
 
 LIVE VERSION: http://frontendowiec.com/gf/index.html
 
+[[http://frontendowiec.com/gf/googlefonts.jpg|alt=googlefonts]]
+
+
 The main idea of this project is to 'copy' as much functionalities as possible from website: https://fonts.google.com/
 
 I used Developer API from Google Fonts from https://developers.google.com/fonts/docs/developer_api
