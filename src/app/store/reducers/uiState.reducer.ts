@@ -9,11 +9,7 @@ export function UIState(state: UI = State.uiState, action: AppActions.UIActions)
         ...state,
         fonstPerPage: state.fonstPerPage + 12
       };
-    case AppActions.FILTER_CATEGORY:
-      return {
-        ...state,
-        selectedCategory: action.payload
-      };
+
     case AppActions.SELECT_SUBSET:
       return {
         ...state,
@@ -28,21 +24,8 @@ export function UIState(state: UI = State.uiState, action: AppActions.UIActions)
       return {
         isChangesMade: false,
         fonstPerPage: 12,
-        selectedCategory: 'all',
-        selectedLanguage: 'latin',
         selectedLangSubsets: [],
-        isNumberOfStylesChecked: false,
-        sorting: 'alpha'
-      };
-    case AppActions.SORTED_BY_METHOD:
-      return {
-        ...state,
-        sorting: action.payload.sortedBy
-      };
-    case AppActions.FILTER_LANGUAGES:
-      return {
-        ...state,
-        selectedLanguage: action.payload
+        isNumberOfStylesChecked: false
       };
     case AppActions.IS_NUMBER_OF_STYLES_CHECKED:
       return {
