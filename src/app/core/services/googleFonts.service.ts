@@ -16,6 +16,7 @@ export class GooglefontsService {
   constructor(private http: HttpClient) {}
 
   getFonts(sortKey: string, category: string, language: string, styles?): Observable<Array<SingleFont>> {
+    
     const url = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyCnpIgKkKjoW4Bl-4AynZy5j2TKP6aK2Jc' + sortKey;
 
     return this.http.get<any>(url).pipe(
