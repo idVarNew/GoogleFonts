@@ -15,7 +15,7 @@ export class GooglefontsService {
 
   constructor(private http: HttpClient) {}
 
-  getFonts(sortKey, category?, language?, styles?): Observable<Array<SingleFont>> {
+  getFonts(sortKey: string, category: string, language: string, styles?): Observable<Array<SingleFont>> {
     const url = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyCnpIgKkKjoW4Bl-4AynZy5j2TKP6aK2Jc' + sortKey;
 
     return this.http.get<any>(url).pipe(
@@ -56,42 +56,42 @@ export class GooglefontsService {
       })
     );
   }
-  getFilteredByStyles(fonts: Array<SingleFont> , styles: number): Array<SingleFont> {
-    return fonts.filter((font: SingleFont)  => {
+  getFilteredByStyles(fonts: Array<SingleFont>, styles: number): Array<SingleFont> {
+    return fonts.filter((font: SingleFont) => {
       const numVariants = font.variants.length;
       return styles < numVariants;
     });
   }
 
   getFilteredByLanguage(fonts: Array<SingleFont>, language: string): Array<SingleFont> {
-    return fonts.filter((font: SingleFont)  => {
+    return fonts.filter((font: SingleFont) => {
       if (font.subsets.indexOf(language) > -1) {
         return font;
       }
     });
   }
 
-  getFilteredByCategory(fonts: Array<SingleFont>, category: string):  Array<SingleFont>{
+  getFilteredByCategory(fonts: Array<SingleFont>, category: string): Array<SingleFont> {
     if (category === 'all') {
       return fonts;
     } else if (category === 'sans-serif') {
-      return fonts.filter((font: SingleFont)  => {
+      return fonts.filter((font: SingleFont) => {
         return font.category === 'sans-serif';
       });
     } else if (category === 'serif') {
-      return fonts.filter((font: SingleFont)  => {
+      return fonts.filter((font: SingleFont) => {
         return font.category === 'serif';
       });
     } else if (category === 'display') {
-      return fonts.filter((font: SingleFont)  => {
+      return fonts.filter((font: SingleFont) => {
         return font.category === 'display';
       });
     } else if (category === 'handwriting') {
-      return fonts.filter((font: SingleFont)  => {
+      return fonts.filter((font: SingleFont) => {
         return font.category === 'handwriting';
       });
     } else if (category === 'monospace') {
-      return fonts.filter((font: SingleFont)  => {
+      return fonts.filter((font: SingleFont) => {
         return font.category === 'monospace';
       });
     } else {
