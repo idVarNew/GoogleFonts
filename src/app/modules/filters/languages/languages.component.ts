@@ -45,10 +45,10 @@ export class LanguagesComponent implements OnInit {
   constructor(private store: Store<AppState>, private googlefontsService: GooglefontsService) {}
 
   ngOnInit() {
-  }
+    }
 
-  filterLanguages(language: string) {
-    this.store.dispatch(new AppActions.filterLanguages(language));
+  filterByLanguage(language: string) {
+   this.store.dispatch(new AppActions.filterByLanguage(language));
   }
 
   sortBy(sortType: string) {

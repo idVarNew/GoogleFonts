@@ -1,16 +1,13 @@
 import * as AppActions from '../actions';
 import { SingleFont } from '../../shared/models/font.model';
-import { State } from '../app.state';
+import { State} from '../app.state';
 
-export function DataState(
-  state: Array<SingleFont> = State.dataState,
-  action: AppActions.DataActions | AppActions.UIActions
-): Array<SingleFont> {
+export function CacheFonts(state:  Array<SingleFont>  = State.cachedFontsState, action)  :Array<SingleFont> {
   switch (action.type) {
-    case AppActions.LOAD_DATA:
+    case AppActions.CACHE_FONTS:
       return [].concat(action.payload);
-
-    case AppActions.CHANGE_FONT_SIZE:
+        
+      case AppActions.CHANGE_FONT_SIZE:
       return state.map((font: SingleFont) => {
         if (font.family === action.payload.family) {
           font.currentState.size = action.payload.value;
@@ -21,7 +18,7 @@ export function DataState(
       });
     case AppActions.ADD_TO_SELECTED_FONTS:
       return state.map((font: SingleFont) => {
-        if (font.family === action.payload.family) {
+        if (font.family === action.payload.family) {         
           font.currentState.selected = !font.currentState.selected;
           return font;
         } else {
@@ -31,7 +28,7 @@ export function DataState(
     case AppActions.USE_CUSTOM_TEXT_AS_SAMPLE:
       return state.map((font: SingleFont) => {
         font.currentState.sampleText = action.payload;
-        font.currentState.sampleType = 'custom';
+        font.currentState.sampleType = "custom"
         return font;
       });
     case AppActions.SAMPLE_TEXT_TYPE:
@@ -124,6 +121,7 @@ export function DataState(
         font.currentState.sampleText = 'Angular';
         font.currentState.sampleType = 'word';
         font.currentState.current = false;
+      //  font.currentState.visible = true;
         font.currentState.selectedVariants = {};
         font.currentState.selectedSubsets = {};
         font.currentState.previewVariants = {
@@ -164,3 +162,4 @@ export function DataState(
       return state;
   }
 }
+

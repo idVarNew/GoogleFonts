@@ -44,12 +44,16 @@ export class FiltersComponent implements OnInit {
       this.path = this.location.path();
     });
 
-    this.store.select('uiState').subscribe((data: UI) => {
-      this.selectedCategory = data.selectedCategory;
-      this.sorting = data.sorting;
-      this.defaultLanguage = data.selectedLanguage;
-      this.isChangesMade = data.isChangesMade;
-      this.isNumberOfStylesChecked = data.isNumberOfStylesChecked;
+    this.store.select('uiState').subscribe((state: UI) => {
+      this.isChangesMade = state.isChangesMade;
+      this.isNumberOfStylesChecked = state.isNumberOfStylesChecked;
+    });
+
+    this.store.select('filterFonts').subscribe(state => {
+
+      this.selectedCategory = state.category;
+      this.defaultLanguage = state.language;
+      this.sorting = state.sorting;
     });
 
     this.store
@@ -70,12 +74,13 @@ export class FiltersComponent implements OnInit {
 
   sortFonts(key: string) {
     this.sorting = key;
-    this.store.dispatch(new AppActions.sortFonts(key));
+    this.store.dispatch(new AppActions.getSorted(key));
     this.googlefontsService.fontLoader = true;
   }
 
   filterCategory(category: string) {
-    this.store.dispatch(new AppActions.filterCategory(category));
+    this.store.dispatch(new AppActions.filterByCategory(category));
+    this.store.dispatch(new AppActions.getFonts());
   }
 
   useCustomTextAsSample(text: string) {
@@ -87,7 +92,7 @@ export class FiltersComponent implements OnInit {
   }
 
   searchFonts(query: string) {
-    this.store.dispatch(new AppActions.searchFonts({query, sortedBy:`&sort=${this.sorting}`}));
+    this.store.dispatch(new AppActions.searchFonts(query));
   }
 
   removeFromSelectedFonts(family: string) {
@@ -102,8 +107,9 @@ export class FiltersComponent implements OnInit {
     this.searchComponent.resetSearchBox();
     this.sampleTextComponent.resetSampleTextBox();
     this.store.dispatch(new AppActions.resetAllFontsSettings(`&sort=alpha`));
-    this.store.dispatch(new AppActions.sortFonts('alpha'));
-    this.store.dispatch(new AppActions.searchFonts({query: '', sortedBy: `&sort=alpha`}));
+    this.store.dispatch(new AppActions.filterByCategory("all"));
+    this.store.dispatch(new AppActions.getSorted("alpha"));
+    this.store.dispatch(new AppActions.filterByLanguage("latin"));
     this.isChangesMade = false;
   }
 
@@ -112,10 +118,10 @@ export class FiltersComponent implements OnInit {
   }
 
   resetSearchBox() {
-    this.store.dispatch(new AppActions.searchFonts({query: '', sortedBy: `&sort=${this.sorting}`}));
+    this.store.dispatch(new AppActions.searchFonts(""));
   }
 
   filterNumberOfStyles(value) {
-    this.store.dispatch(new AppActions.filterNumberOfStyles(value));
+    this.store.dispatch(new AppActions.filterByNumberOfStyles(value));
   }
 }

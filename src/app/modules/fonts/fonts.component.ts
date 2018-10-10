@@ -16,7 +16,7 @@ import { SingleFont, UI } from '../../shared/models/font.model';
 })
 export class FontsComponent implements OnInit {
   fonts: Array<SingleFont>;
-  visibleFonts: Array<SingleFont>;
+  availableFonts: Array<SingleFont>;
   uiState: UI;
   fontLoader = true;
   sortingType = '';
@@ -27,9 +27,19 @@ export class FontsComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private googlefontsService: GooglefontsService,
-    private textFiltersService: TextFiltersService,
-    private activatedRoute: ActivatedRoute
+    private textFiltersService: TextFiltersService
   ) {}
+
+  changeFilter(filter) {
+    this.store.dispatch(new AppActions.filterByCategory(filter));
+    this.store.dispatch(new AppActions.getFonts());
+  }
+  searchFonts(value) {
+    this.store.dispatch(new AppActions.searchFonts(value));
+  }
+  sortBy(value) {
+    this.store.dispatch(new AppActions.getSorted(value));
+  }
 
   ngOnInit() {
     this.store
@@ -38,29 +48,18 @@ export class FontsComponent implements OnInit {
         tap(
           (ui: UI): void => {
             this.uiState = ui;
-            this.sortingType = this.textFiltersService.convertSortingType(ui.sorting);
+            this.store.select('filterFonts').pipe(
+              tap(store => {
+                this.sortingType = store.sorting;
+                this.textFiltersService.convertSortingType(store.sorting);
+              })
+            );
           }
         ),
         switchMap((ui: UI) => {
           return this.store.select('dataState').pipe(
             map((fonts: Array<SingleFont>) => {
-                   
-              if (ui.selectedCategory === 'all') {
-                return fonts.filter((font: SingleFont) => {
-                  return font.currentState.visible === true && font.subsets.indexOf(ui.selectedLanguage) > -1;
-                });
-              } else {
-                return fonts.filter((font: SingleFont) => {
-                  return font.category === ui.selectedCategory && font.subsets.indexOf(ui.selectedLanguage) > -1;
-                });
-              }
-            }),
-            tap(
-              (fonts: Array<SingleFont>): void => {
-                this.visibleFonts = fonts;
-              }
-            ),
-            map((fonts: Array<SingleFont>) => {
+              this.availableFonts = fonts;
               return fonts.filter((font: SingleFont, i: number) => {
                 if (i < this.uiState.fonstPerPage) {
                   return font;
@@ -84,7 +83,6 @@ export class FontsComponent implements OnInit {
         this.fonts = fonts.map((font: SingleFont) => {
           return font;
         });
-       
       });
   }
 

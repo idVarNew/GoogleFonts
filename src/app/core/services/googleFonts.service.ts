@@ -15,7 +15,7 @@ export class GooglefontsService {
 
   constructor(private http: HttpClient) {}
 
-  getFonts(sortKey): Observable<Array<SingleFont>> {
+  getFonts(sortKey, category?, language?, styles?): Observable<Array<SingleFont>> {
     const url = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyCnpIgKkKjoW4Bl-4AynZy5j2TKP6aK2Jc' + sortKey;
 
     return this.http.get<any>(url).pipe(
@@ -24,7 +24,6 @@ export class GooglefontsService {
           (font: SingleFont): SingleFont => {
             font.currentState = {
               current: false,
-              visible: true,
               selected: false,
               selectedVariants: {},
               selectedSubsets: {},
@@ -46,10 +45,58 @@ export class GooglefontsService {
             return font;
           }
         );
+        const filterdByCategoryFonts = this.getFilteredByCategory(fonts, category);
+        const filterdByLanguageFonts = this.getFilteredByLanguage(filterdByCategoryFonts, language);
 
-         return fonts;
+        if (styles) {
+          return this.getFilteredByStyles(filterdByLanguageFonts, styles);
+        } else {
+          return this.getFilteredByLanguage(filterdByCategoryFonts, language);
+        }
       })
     );
+  }
+  getFilteredByStyles(fonts, styles) {
+    return fonts.filter(font => {
+      const numVariants = font.variants.length;
+      return styles < numVariants;
+    });
+  }
+
+  getFilteredByLanguage(fonts, language) {
+    return fonts.filter(font => {
+      if (font.subsets.indexOf(language) > -1) {
+        return font;
+      }
+    });
+  }
+
+  getFilteredByCategory(fonts, category) {
+    if (category === 'all') {
+      return fonts;
+    } else if (category === 'sans-serif') {
+      return fonts.filter(font => {
+        return font.category === 'sans-serif';
+      });
+    } else if (category === 'serif') {
+      return fonts.filter(font => {
+        return font.category === 'serif';
+      });
+    } else if (category === 'display') {
+      return fonts.filter(font => {
+        return font.category === 'display';
+      });
+    } else if (category === 'handwriting') {
+      return fonts.filter(font => {
+        return font.category === 'handwriting';
+      });
+    } else if (category === 'monospace') {
+      return fonts.filter(font => {
+        return font.category === 'monospace';
+      });
+    } else {
+      return fonts;
+    }
   }
 
   loadWebFonts(fonts: Array<SingleFont>, fonstPerPage: number): void {
@@ -68,6 +115,7 @@ export class GooglefontsService {
       }
     });
 
+    
     WebFont.load({
       classes: false,
       google: {

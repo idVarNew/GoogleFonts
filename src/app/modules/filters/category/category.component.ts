@@ -18,6 +18,7 @@ export class CategoryComponent {
 
   filterCategory(category: string) {
     this.filterCategoryEE.emit(category);
+    console.log( this.selectedCategory)
   }
 
   sortBy(sortType: string) {

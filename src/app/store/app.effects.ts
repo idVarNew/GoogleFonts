@@ -15,14 +15,14 @@ export class Effects {
     private googlefontsService: GooglefontsService
   ) {}
 
-  oldState: Array<SingleFont>;
-
   @Effect()
   getGoogleGonts$ = this.actions$.pipe(
     ofType(AppActions.LOAD_INITIAL_DATA),
-    switchMap(data =>
-      this.googlefontsService.getFonts('').pipe(
+    withLatestFrom(this.store.select('filterFontsState'), (action, state) => state),
+    switchMap(state =>
+      this.googlefontsService.getFonts(`&sort=${state.sorting}`, state.category, state.language).pipe(
         map((data: any) => {
+          this.store.dispatch(new AppActions.cache(data));
           return new AppActions.loadData(data);
         }),
         catchError(error => error)
@@ -33,13 +33,13 @@ export class Effects {
   @Effect({ dispatch: false })
   isChangesMade$ = this.actions$.pipe(
     ofType(
+      AppActions.GET_FONTS,
+      AppActions.FILTER_LANGUAGES,
+      AppActions.SORT_FONTS,
       AppActions.SORTED_BY,
-      AppActions.FILTER_CATEGORY,
       AppActions.IS_NUMBER_OF_STYLES_CHECKED,
       AppActions.CHANGE_FONT_SIZE,
-      AppActions.FILTER_CATEGORY,
       AppActions.SELECT_SUBSET,
-      AppActions.FILTER_LANGUAGES,
       AppActions.USE_CUSTOM_TEXT_AS_SAMPLE,
       AppActions.SAMPLE_TEXT_TYPE,
       AppActions.SEARCH_FONTS
@@ -50,52 +50,59 @@ export class Effects {
   );
 
   @Effect()
-  sorting$ = this.actions$.pipe(
-    ofType(AppActions.SORTED_BY),
-    tap(action => {
-      this.store.dispatch(new AppActions.getSortingMethod(action));
-    }),
-    withLatestFrom(this.store),
-    concatMap(([action, storeState]) => {
-      this.oldState = storeState['dataState'];
+  getFilteredFonts$ = this.actions$.pipe(
+    ofType('GET_FONTS', 'FILTER_LANGUAGES', 'SORT_FONTS', 'FILTER_NUMBER_OF_STYLES'),
+    withLatestFrom(this.store, (action, state) => state),
+    switchMap(store => {
+      const cachedFonts = store['cacheFonts'];
 
-      return this.googlefontsService.getFonts(`&sort=${action['sortedBy']}`).pipe(
-        map(data => {
-          const fonts: Array<SingleFont> = data.map((font: SingleFont) => {
-            const oldFonts : Array<SingleFont>= this.oldState.filter((item: SingleFont) => {
-              return font.family === item.family;
+      return this.googlefontsService
+        .getFonts(
+          `&sort=${store.filterFontsState.sorting}`,
+          store.filterFontsState.category,
+          store.filterFontsState.language,
+          store.filterFontsState.styles
+        )
+        .pipe(
+          map(data => {
+            data.forEach((font: SingleFont) => {
+              const cachedFont = cachedFonts.filter((item: SingleFont) => {
+                return font.family === item.family;
+              });
+              font.currentState = persistValues(cachedFont[0]);
             });
-
-            font.currentState = persistValues(oldFonts[0]);
-            return font;
-          });
-          return new AppActions.loadData(fonts);
-        }),
-        catchError(error => error)
-      );
+            return new AppActions.loadData(data);
+          }),
+          catchError(error => error)
+        );
     })
   );
 
   @Effect()
   searchFonts$ = this.actions$.pipe(
-    ofType(AppActions.SEARCH_FONTS),
-    withLatestFrom(this.store),
-    switchMap(([action, storeState]) => {
-      this.oldState = storeState['dataState'];
+    ofType('SEARCH_FONTS'),
+    withLatestFrom(this.store, (action, state) => {
+      return { action, state };
+    }),
+    switchMap(store => {
+      const cachedFonts = store.state['cacheFonts'];
 
-      return this.googlefontsService.getFonts(action['payload'].sortedBy).pipe(
+      return this.googlefontsService.getFonts(`&sort=${'alpha'}`, 'all', 'latin').pipe(
         map(data => {
-           data.forEach((font: SingleFont) => {
-            font.currentState.visible = true;
+          const fonts = data.filter(font => {
+            const family = font.family.toLowerCase();
+            const query = store.action['payload'].toLowerCase();
 
-            const oldFonts: Array<SingleFont> = this.oldState.filter((item:SingleFont) => {
-              return font.family === item.family;
-            });
+            if (family.includes(query)) {
+              const cachedFont = cachedFonts.filter((item: SingleFont) => {
+                return font.family === item.family;
+              });
+              font.currentState = persistValues(cachedFont[0]);
 
-            font.currentState = persistValues(oldFonts[0]);
-            return font;
+              return font;
+            }
           });
-          return new AppActions.changeVisibleFonts(action['payload'].query);
+          return new AppActions.loadData(fonts);
         }),
         catchError(error => error)
       );
@@ -106,7 +113,6 @@ export class Effects {
 function persistValues(oldFont) {
   return {
     current: oldFont.currentState.current,
-    visible: oldFont.currentState.visible,
     selected: oldFont.currentState.selected,
     selectedVariants: Object.assign({}, oldFont.currentState.selectedVariants),
     selectedSubsets: Object.assign({}, oldFont.currentState.selectedSubsets),
