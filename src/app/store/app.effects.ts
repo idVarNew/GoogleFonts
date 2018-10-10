@@ -117,15 +117,15 @@ export class Effects {
   );
 }
 
-function persistValues(cacheFont) {
+function persistValues(font) {
   return {
-    current: cacheFont.currentState.current,
-    selected: cacheFont.currentState.selected,
-    selectedVariants: Object.assign({}, cacheFont.currentState.selectedVariants),
-    selectedSubsets: Object.assign({}, cacheFont.currentState.selectedSubsets),
-    size: cacheFont.currentState.size,
-    sampleText: cacheFont.currentState.sampleText,
-    sampleType: cacheFont.currentState.sampleType,
-    previewVariants: Object.assign({}, cacheFont.currentState.previewVariants)
+    current: font.currentState.current,
+    selected: font.currentState.selected,
+    selectedVariants: Object.assign({}, font.currentState.selectedVariants),
+    selectedSubsets: Object.assign({}, font.currentState.selectedSubsets),
+    size: font.currentState.size,
+    sampleText: font.currentState.sampleText,
+    sampleType: font.currentState.sampleType,
+    previewVariants: Object.assign({}, font.currentState.previewVariants)
   };
 }
