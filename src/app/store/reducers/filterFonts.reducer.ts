@@ -1,8 +1,7 @@
 import * as AppActions from '../actions';
 import { State } from '../app.state';
-import { Filtered } from '../../shared/models/font.model';
 
-export function FilterFonts(state = State.filterFontsState, action): Filtered {
+export function FilterFonts(state = State.filterFonts, action) {
   switch (action.type) {
     case AppActions.FILTER_CATEGORIES:
       return {
@@ -19,10 +18,10 @@ export function FilterFonts(state = State.filterFontsState, action): Filtered {
         ...state,
         language: action.payload
       };
-    case AppActions.FILTER_NUMBER_OF_STYLES:
+      case AppActions.FILTER_NUMBER_OF_STYLES:
       return {
         ...state,
-        styles: action.payload
+       styles: action.payload
       };
     default:
       return state;

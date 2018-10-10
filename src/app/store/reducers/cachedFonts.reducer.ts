@@ -2,7 +2,7 @@ import * as AppActions from '../actions';
 import { SingleFont } from '../../shared/models/font.model';
 import { State} from '../app.state';
 
-export function CacheFonts(state:  Array<SingleFont>  = State.cachedFontsState, action)  :Array<SingleFont> {
+export function CacheFonts(state = State.cachedFonts, action) {
   switch (action.type) {
     case AppActions.CACHE_FONTS:
       return [].concat(action.payload);

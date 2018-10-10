@@ -18,7 +18,7 @@ export class Effects {
   @Effect()
   getGoogleGonts$ = this.actions$.pipe(
     ofType(AppActions.LOAD_INITIAL_DATA),
-    withLatestFrom(this.store.select('filterFontsState'), (action, state) => state),
+    withLatestFrom(this.store.select('filterFonts'), (action, state) => state),
     switchMap(state =>
       this.googlefontsService.getFonts(`&sort=${state.sorting}`, state.category, state.language).pipe(
         map((data: any) => {
@@ -58,10 +58,10 @@ export class Effects {
 
       return this.googlefontsService
         .getFonts(
-          `&sort=${store.filterFontsState.sorting}`,
-          store.filterFontsState.category,
-          store.filterFontsState.language,
-          store.filterFontsState.styles
+          `&sort=${store.filterFonts.sorting}`,
+          store.filterFonts.category,
+          store.filterFonts.language,
+          store.filterFonts.styles
         )
         .pipe(
           map(data => {
@@ -87,7 +87,7 @@ export class Effects {
     switchMap(store => {
       const cachedFonts = store.state['cacheFonts'];
 
-      return this.googlefontsService.getFonts(`&sort=${'alpha'}`, 'all', 'latin').pipe(
+      return this.googlefontsService.getFonts(`&sort=${'all'}`, 'all', 'latin').pipe(
         map(data => {
           const fonts = data.filter(font => {
             const family = font.family.toLowerCase();
