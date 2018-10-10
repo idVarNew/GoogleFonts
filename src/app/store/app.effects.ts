@@ -51,7 +51,12 @@ export class Effects {
 
   @Effect()
   getFilteredFonts$ = this.actions$.pipe(
-    ofType('GET_FONTS', 'FILTER_LANGUAGES', 'SORT_FONTS', 'FILTER_NUMBER_OF_STYLES'),
+    ofType(
+      AppActions.GET_FONTS,
+      AppActions.FILTER_LANGUAGES,
+      AppActions.SORT_FONTS,
+      AppActions.FILTER_NUMBER_OF_STYLES
+    ),
     withLatestFrom(this.store, (action, state) => state),
     switchMap(store => {
       const cachedFonts = store['cacheFonts'];
@@ -80,7 +85,7 @@ export class Effects {
 
   @Effect()
   searchFonts$ = this.actions$.pipe(
-    ofType('SEARCH_FONTS'),
+    ofType(AppActions.SEARCH_FONTS),
     withLatestFrom(this.store, (action, state) => {
       return { action, state };
     }),
