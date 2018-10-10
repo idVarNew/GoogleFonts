@@ -28,4 +28,4 @@ export class filterByNumberOfStyles implements Action {
   readonly type = FILTER_NUMBER_OF_STYLES;
   constructor(public payload: number) {}
 }
-export type Actions = filterByCategory | getSorted | filterByLanguage | searchFonts | filterByNumberOfStyles
+export type ActionsFilter = filterByCategory | getSorted | filterByLanguage | searchFonts | filterByNumberOfStyles

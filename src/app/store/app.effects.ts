@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { GooglefontsService } from '../core/services/googlefonts.service';
 import { switchMap, map, catchError, withLatestFrom, tap, concatMap } from 'rxjs/operators';
 import * as AppActions from './actions';
-import { Store } from '@ngrx/store';
+import { Store, Action } from '@ngrx/store';
 import { AppState } from './app.state';
-import { SingleFont, UI } from '../shared/models/font.model';
+import { SingleFont, UI, Filtered } from '../shared/models/font.model';
 
 @Injectable()
 export class Effects {
@@ -57,9 +57,9 @@ export class Effects {
       AppActions.SORT_FONTS,
       AppActions.FILTER_NUMBER_OF_STYLES
     ),
-    withLatestFrom(this.store, (action, state) => state),
-    switchMap(store => {
-      const cachedFonts = store['cacheFonts'];
+    withLatestFrom(this.store, (action, state: AppState) => state),
+    switchMap((store: AppState) => {
+      const cachedFonts: Array<SingleFont> = store['cacheFonts'];
 
       return this.googlefontsService
         .getFonts(
@@ -69,13 +69,15 @@ export class Effects {
           store.filterFonts.styles
         )
         .pipe(
-          map(data => {
-            data.forEach((font: SingleFont) => {
-              const cachedFont = cachedFonts.filter((item: SingleFont) => {
-                return font.family === item.family;
-              });
-              font.currentState = persistValues(cachedFont[0]);
-            });
+          map((data: Array<SingleFont>) => {
+            data.forEach(
+              (font: SingleFont): void => {
+                const cachedFont = cachedFonts.filter((item: SingleFont) => {
+                  return font.family === item.family;
+                });
+                font.currentState = persistValues(cachedFont[0]);
+              }
+            );
             return new AppActions.loadData(data);
           }),
           catchError(error => error)
@@ -86,17 +88,17 @@ export class Effects {
   @Effect()
   searchFonts$ = this.actions$.pipe(
     ofType(AppActions.SEARCH_FONTS),
-    withLatestFrom(this.store, (action, state) => {
+    withLatestFrom(this.store, (action: Action, state: AppState) => {
       return { action, state };
     }),
     switchMap(store => {
-      const cachedFonts = store.state['cacheFonts'];
+      const cachedFonts: Array<SingleFont> = store.state['cacheFonts'];
 
       return this.googlefontsService.getFonts(`&sort=${'all'}`, 'all', 'latin').pipe(
-        map(data => {
-          const fonts = data.filter(font => {
-            const family = font.family.toLowerCase();
-            const query = store.action['payload'].toLowerCase();
+        map((data: Array<SingleFont>) => {
+          const fonts = data.filter((font: SingleFont) => {
+            const family: string = font.family.toLowerCase();
+            const query: string = store.action['payload'].toLowerCase();
 
             if (family.includes(query)) {
               const cachedFont = cachedFonts.filter((item: SingleFont) => {
@@ -115,15 +117,15 @@ export class Effects {
   );
 }
 
-function persistValues(oldFont) {
+function persistValues(cacheFont) {
   return {
-    current: oldFont.currentState.current,
-    selected: oldFont.currentState.selected,
-    selectedVariants: Object.assign({}, oldFont.currentState.selectedVariants),
-    selectedSubsets: Object.assign({}, oldFont.currentState.selectedSubsets),
-    size: oldFont.currentState.size,
-    sampleText: oldFont.currentState.sampleText,
-    sampleType: oldFont.currentState.sampleType,
-    previewVariants: Object.assign({}, oldFont.currentState.previewVariants)
+    current: cacheFont.currentState.current,
+    selected: cacheFont.currentState.selected,
+    selectedVariants: Object.assign({}, cacheFont.currentState.selectedVariants),
+    selectedSubsets: Object.assign({}, cacheFont.currentState.selectedSubsets),
+    size: cacheFont.currentState.size,
+    sampleText: cacheFont.currentState.sampleText,
+    sampleType: cacheFont.currentState.sampleType,
+    previewVariants: Object.assign({}, cacheFont.currentState.previewVariants)
   };
 }
