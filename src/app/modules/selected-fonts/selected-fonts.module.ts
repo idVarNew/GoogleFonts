@@ -6,6 +6,9 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { ContenteditableModule } from 'ng-contenteditable';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { SharedModule } from '../../shared/shared.module';
+import { SelectedFontsRoutingModule} from './selected-fonts-routing.module';
+
+
 
 import {
     SelectedSubsetsComponent,
@@ -22,10 +25,12 @@ import {
         CommonModule,
         NgbModule,
         FormsModule,
-        AppRoutingModule,
+        SelectedFontsRoutingModule,
+    //    AppRoutingModule,
         ContenteditableModule,
         NgxMasonryModule,
-        SharedModule
+        SharedModule,
+   
     ],
     declarations: [
         SelectedSubsetsComponent,

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UI } from '../../../shared/models/font.model';
+import { Filtered } from '../../../shared/models/font.model';
 
 @Component({
   selector: 'app-filters-bar',
@@ -8,11 +8,14 @@ import { UI } from '../../../shared/models/font.model';
 })
 export class FiltersBarComponent implements OnInit {
   @Input()
-  uiState: UI;
+  perPage: number;
   @Input()
-  sortingType;
+  filters: Filtered;
+  @Input()
+  sortingType: string;
 
   constructor() {}
 
   ngOnInit() {}
+  
 }

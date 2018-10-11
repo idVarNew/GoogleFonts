@@ -8,6 +8,7 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { FontCardModule } from '../font-card/font-card.module';
 import { SharedModule } from '../../shared/shared.module';
 import {FontsComponent, FiltersBarComponent} from '.';
+import {FontsRoutingModule} from './fonts-routing.module';
 
 
 @NgModule({
@@ -15,10 +16,12 @@ import {FontsComponent, FiltersBarComponent} from '.';
         CommonModule,
         NgbModule,
         FormsModule,
-        AppRoutingModule,
+        FontCardModule,
+        FontsRoutingModule,
+    //   AppRoutingModule,
         ContenteditableModule,
         NgxMasonryModule,
-        FontCardModule,
+      
         SharedModule,
     ],
     declarations: [
@@ -29,4 +32,5 @@ import {FontsComponent, FiltersBarComponent} from '.';
         FontsComponent
     ]
 })
+
 export class FontsModule { }

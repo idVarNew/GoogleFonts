@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import * as AppActions from '../../store/actions';
 import { map } from 'rxjs/operators';
@@ -60,7 +60,7 @@ export class SelectedFontsComponent implements OnInit {
   generateLanguages(): string {
     let languages = '';
 
-    this.store.select('uiState').subscribe((ui: UI) => {
+    this.store.pipe(select('uiState')).subscribe((ui: UI) => {
       this.selectedLangSubsets = ui.selectedLangSubsets;
     });
 

@@ -16,15 +16,6 @@ export function CacheFonts(state: Array<SingleFont> = State.cachedFonts, action)
           return font;
         }
       });
-    case AppActions.ADD_TO_SELECTED_FONTS:
-      return state.map((font: SingleFont) => {
-        if (font.family === action.payload.family) {
-          font.currentState.selected = !font.currentState.selected;
-          return font;
-        } else {
-          return font;
-        }
-      });
     case AppActions.USE_CUSTOM_TEXT_AS_SAMPLE:
       return state.map((font: SingleFont) => {
         font.currentState.sampleText = action.payload;

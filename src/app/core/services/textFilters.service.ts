@@ -7,24 +7,24 @@ export class TextFiltersService {
   constructor() {}
 
   convertSortingType(value) {
-    let sampleText = '';
+    let type = '';
 
     switch (value) {
       case 'alpha':
-        sampleText = 'Alphabetical';
+        type = 'Alphabetical';
         break;
       case 'popularity':
-        sampleText = 'Popular';
+        type = 'Popular';
         break;
       case 'date':
-        sampleText = 'Date added';
+        type = 'Date added';
         break;
       case 'trending':
-        sampleText = 'trending';
+        type = 'trending';
         break;
       default:
-        sampleText = 'Alphabetical';
+        type = 'Alphabetical';
     }
-    return sampleText;
+    return type;
   }
 }

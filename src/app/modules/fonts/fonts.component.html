@@ -1,11 +1,15 @@
-<app-filters-bar [uiState]="uiState" [sortingType]="sortingType">
+
+<app-filters-bar [filters]="filters" [sortingType]="sortingType"  [perPage]="perPage">
 </app-filters-bar>
+
+
+
 <ng-container>
   <ngx-masonry #masonry [updateLayout]="updateMasonryLayout" [options]="{ transitionDuration: '0.00000000001' }">
     <ng-container *ngFor="let font of fonts; let i = index">
     
-      <ngxMasonryItem class="card masonry-item" *ngIf="i< uiState.fonstPerPage" #mor>       
-        <app-font-card (selectToPreviewEE)="selectToPreview()" [font]="font" [i]="i" [uiState]="uiState" (layout)="adjustLayout()"
+      <ngxMasonryItem class="card masonry-item" *ngIf="i< perPage" #mor>       
+        <app-font-card (selectToPreviewEE)="selectToPreview()" [font]="font" [i]="i" (layout)="adjustLayout()"
           class="card-body"></app-font-card>
       </ngxMasonryItem>
     </ng-container>

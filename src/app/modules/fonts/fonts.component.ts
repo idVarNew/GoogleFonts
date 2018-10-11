@@ -7,7 +7,7 @@ import { switchMap, map, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import * as AppActions from '../../store/actions';
-import { SingleFont, UI } from '../../shared/models/font.model';
+import { SingleFont, UI, Filtered } from '../../shared/models/font.model';
 
 @Component({
   selector: 'app-fonts',
@@ -17,10 +17,9 @@ import { SingleFont, UI } from '../../shared/models/font.model';
 export class FontsComponent implements OnInit {
   fonts: Array<SingleFont>;
   availableFonts: Array<SingleFont>;
-  uiState: UI;
+  filters: Filtered;
   fontLoader = true;
-  sortingType = '';
-
+  perPage: number;
   @ViewChild('masonry')
   masonry;
 
@@ -42,18 +41,18 @@ export class FontsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.select('filterFonts').subscribe((store):void => {
+        this.filters = store
+        this.textFiltersService.convertSortingType(store.sorting);
+      }
+    );
+
     this.store
       .select('uiState')
       .pipe(
         tap(
           (ui: UI): void => {
-            this.uiState = ui;
-            this.store.select('filterFonts').pipe(
-              tap(store => {
-                this.sortingType = store.sorting;
-                this.textFiltersService.convertSortingType(store.sorting);
-              })
-            );
+            this.perPage = ui.fonstPerPage;
           }
         ),
         switchMap((ui: UI) => {
@@ -61,7 +60,7 @@ export class FontsComponent implements OnInit {
             map((fonts: Array<SingleFont>) => {
               this.availableFonts = fonts;
               return fonts.filter((font: SingleFont, i: number) => {
-                if (i < this.uiState.fonstPerPage) {
+                if (i < this.perPage) {
                   return font;
                 }
               });

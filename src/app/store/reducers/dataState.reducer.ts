@@ -22,6 +22,7 @@ export function DataState(
     case AppActions.ADD_TO_SELECTED_FONTS:
       return state.map((font: SingleFont) => {
         if (font.family === action.payload.family) {
+          
           font.currentState.selected = !font.currentState.selected;
           return font;
         } else {

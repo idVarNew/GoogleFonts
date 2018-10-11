@@ -1,21 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FontdetailsComponent } from './modules/font-details/font-details.component';
-import { FontsComponent } from './modules/fonts/fonts.component';
-import { SelectedFontsComponent } from './modules/selected-fonts/selected-fonts.component';
 
 const routes: Routes = [
   {
     path: 'selected-fonts',
-    component: SelectedFontsComponent
+    loadChildren: "./modules/selected-fonts/selected-fonts.module#SelectedFontsModule"
   },
   {
     path: 'fonts/:familyName',
-    component: FontdetailsComponent
+    loadChildren: "./modules/font-details/font-details.module#FontdetailsModule"
   },
   {
     path: '',
-    component: FontsComponent
+    loadChildren: "./modules/fonts/fonts.module#FontsModule"
   },
   {
     path: '**',
@@ -24,7 +21,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [    
+    RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

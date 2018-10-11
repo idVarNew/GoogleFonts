@@ -1,10 +1,10 @@
 <p class="filters-bar ">
   <span class="bar-item">
-    Viewing {{uiState.fonstPerPage}} fonts.
+    Viewing {{perpage}} fonts.
   </span>
   <span class="bar-item">
     Category:
-    <span class="font-weight-bold text-uppercase">{{uiState.selectedCategory}}</span>.
+    <span class="font-weight-bold text-uppercase">{{filters.category}}</span>.
   </span>
   <span class="bar-item">
     Sorting:
@@ -12,7 +12,7 @@
   </span>
   <span class="bar-item">
     Language:
-    <span class="font-weight-bold text-uppercase">{{uiState.selectedLanguage === 'latin-ext' ? "latin-ext (polish)": uiState.selectedLanguage}}</span>.
+    <span class="font-weight-bold text-uppercase">{{filters.language === 'latin-ext' ? "latin-ext (polish)": filters.language}}</span>.
 
   </span>
 </p>

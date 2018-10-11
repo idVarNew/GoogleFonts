@@ -2,7 +2,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppRoutingModule } from '../../app-routing.module';
+import { FontsRoutingModule } from '../fonts/fonts-routing.module';
 import { ContenteditableModule } from 'ng-contenteditable';
 import { SharedModule } from '../../shared/shared.module';
 
@@ -23,8 +23,9 @@ import {
         NgbModule,
        SharedModule,
       FormsModule,
-        AppRoutingModule,
-        ContenteditableModule,
+      ContenteditableModule,
+      FontsRoutingModule
+     
        
     ],
     declarations: [

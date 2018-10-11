@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { GooglefontsService } from '../../core/services/googlefonts.service';
 import { SingleFont } from '../../shared/models/font.model';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { switchMap, tap, map } from 'rxjs/operators';
 import * as AppActions from '../../store/actions';
@@ -34,7 +34,7 @@ export class FontdetailsComponent implements OnInit {
     this.activeRoute.paramMap
       .pipe(
         switchMap((param: ParamMap) => {
-          return this.store.select('dataState').pipe(
+          return this.store.pipe(select('dataState')).pipe(
             map((fonts: Array<SingleFont>) => {
               return fonts.filter((font: SingleFont) => {
                 if (font.family === param.get('familyName')) {

@@ -14,7 +14,7 @@ import { RemoveFontButtonComponent } from './components/remove-font-button/remov
         CommonModule,
         NgbModule,
         FormsModule,
-        AppRoutingModule,
+
     ],
     declarations: [
         SelectionButtonComponent,

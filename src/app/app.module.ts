@@ -31,9 +31,9 @@ import { CacheFonts } from './store/reducers/cachedFonts.reducer';
       filterFonts: FilterFonts,
       cacheFonts: CacheFonts
     }),
-    FontdetailsModule,
-    FontsModule,
-    SelectedFontsModule
+    
+   
+
   ],
   providers: [],
   bootstrap: [AppComponent]

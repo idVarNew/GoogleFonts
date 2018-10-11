@@ -31,8 +31,7 @@ export class FontCardComponent implements OnInit {
   font: SingleFont;
   @Input()
   i: number;
-  @Input()
-  uiState: UI;
+
   @Output()
   layout = new EventEmitter<void>();
   @Output()
