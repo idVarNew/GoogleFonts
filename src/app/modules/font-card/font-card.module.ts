@@ -6,7 +6,6 @@ import { FontsRoutingModule } from '../fonts/fonts-routing.module';
 import { ContenteditableModule } from 'ng-contenteditable';
 import { SharedModule } from '../../shared/shared.module';
 
-
 import {
     FontPreviewComponent,
     SampleTextComponent,
@@ -19,13 +18,12 @@ import {
 
 @NgModule({
     imports: [
-        CommonModule,
-        NgbModule,
-       SharedModule,
+      CommonModule,
+      NgbModule,
+      SharedModule,
       FormsModule,
       ContenteditableModule,
-      FontsRoutingModule
-     
+      FontsRoutingModule  
        
     ],
     declarations: [

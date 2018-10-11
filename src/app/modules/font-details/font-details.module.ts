@@ -24,7 +24,6 @@ import {
     FormsModule,   
     ContenteditableModule,
     SharedModule,
- //   AppRoutingModule,
     FontDetailsRoutingModule, 
   ],
   declarations: [

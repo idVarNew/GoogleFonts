@@ -26,7 +26,6 @@ import {
         NgbModule,
         FormsModule,
         SelectedFontsRoutingModule,
-    //    AppRoutingModule,
         ContenteditableModule,
         NgxMasonryModule,
         SharedModule,

@@ -18,7 +18,6 @@ import {FontsRoutingModule} from './fonts-routing.module';
         FormsModule,
         FontCardModule,
         FontsRoutingModule,
-    //   AppRoutingModule,
         ContenteditableModule,
         NgxMasonryModule,
       
