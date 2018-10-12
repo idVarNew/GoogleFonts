@@ -2,9 +2,12 @@ import * as AppActions from '../actions';
 import { SingleFont } from '../../shared/models/font.model';
 import { State } from '../app.state';
 
-export function CacheFonts(state: Array<SingleFont> = State.cachedFonts, action): Array<SingleFont> {
+export function DataState(
+  state: Array<SingleFont> = State.dataState,
+  action: AppActions.DataActions | AppActions.UIActions
+): Array<SingleFont> {
   switch (action.type) {
-    case AppActions.CACHE_FONTS:
+    case AppActions.LOAD_DATA:
       return [].concat(action.payload);
 
     case AppActions.CHANGE_FONT_SIZE:
@@ -16,13 +19,23 @@ export function CacheFonts(state: Array<SingleFont> = State.cachedFonts, action)
           return font;
         }
       });
+    case AppActions.ADD_TO_SELECTED_FONTS:
+      return state.map((font: SingleFont) => {
+        if (font.family === action.payload.family) {
+          font.currentState.selected = true;
+          return font;
+        } else {
+          return font;
+        }
+      });
+
     case AppActions.USE_CUSTOM_TEXT_AS_SAMPLE:
       return state.map((font: SingleFont) => {
         font.currentState.sampleText = action.payload;
         font.currentState.sampleType = 'custom';
         return font;
       });
-    case AppActions.SAMPLE_TEXT_TYPE:
+    case AppActions.SET_SAMPLE_TEXT:
       return state.map((font: SingleFont) => {
         if (font.family === action.payload.family) {
           font.currentState.sampleText = action.payload.sampleText;
@@ -55,7 +68,19 @@ export function CacheFonts(state: Array<SingleFont> = State.cachedFonts, action)
         if (font.family === action.payload.family) {
           font.currentState.selectedVariants = {
             ...font.currentState.selectedVariants,
-            [action.payload.variant]: !font.currentState.selectedVariants[action.payload.variant]
+            [action.payload.variant]: true
+          };
+          return font;
+        } else {
+          return font;
+        }
+      });
+    case AppActions.DESELECT_VARIANTS:
+      return state.map((font: SingleFont) => {
+        if (font.family === action.payload.family) {
+          font.currentState.selectedVariants = {
+            ...font.currentState.selectedVariants,
+            [action.payload.variant]: false
           };
           return font;
         } else {

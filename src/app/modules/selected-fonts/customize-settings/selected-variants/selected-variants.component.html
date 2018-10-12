@@ -9,7 +9,7 @@
          <div *ngFor="let variant of font.variants; let i = index">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" [id]="'variant'+ i+font.family" 
-              (change)="selectVariant(font, variant)" [checked]="font.currentState.selectedVariants[variant]"
+              (change)="selectVariant(font, variant, $event)" [checked]="font.currentState.selectedVariants[variant]"
                 [disabled]="variant === 'regular' ">
               <label class="custom-control-label" [for]="'variant'+ i+font.family" [class.disbled-label]="variant === 'regular'">{{variant}}</label>
             </div>

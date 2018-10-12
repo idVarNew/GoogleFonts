@@ -9,7 +9,6 @@ export function UIState(state: UI = State.uiState, action: AppActions.UIActions)
         ...state,
         fonstPerPage: state.fonstPerPage + 12
       };
-
     case AppActions.SELECT_SUBSET:
       return {
         ...state,
@@ -18,7 +17,7 @@ export function UIState(state: UI = State.uiState, action: AppActions.UIActions)
     case AppActions.DESELECT_SUBSET:
       return {
         ...state,
-        selectedLangSubsets: state.selectedLangSubsets.filter(subset => subset !== action.payload)
+        selectedLangSubsets: state.selectedLangSubsets.filter((subset: string) => subset !== action.payload)
       };
     case AppActions.RESET_ALL_FONTS_SETTINGS:
       return {

@@ -3,8 +3,9 @@ import { SingleFont, UI, Filtered } from '../shared/models/font.model';
 export interface AppState {
   dataState: Array<SingleFont>;
   uiState: UI;
-  filterFonts: Filtered ;
+  filterFontsState: Filtered ;
   cachedFonts: Array<SingleFont>;
+  selectedFontsState: Array<SingleFont>
 }
 
 const initialUIState: UI = {
@@ -14,7 +15,7 @@ const initialUIState: UI = {
   isNumberOfStylesChecked: false
 };
 
-const initialFilterFontsState: Filtered   =  {
+const initialfilterFontsStateState: Filtered   =  {
     category: 'all',
     sorting: 'alpha',
     language: 'latin',
@@ -22,8 +23,9 @@ const initialFilterFontsState: Filtered   =  {
   }
   
 export const State: AppState = {
-  filterFonts: initialFilterFontsState,
+  filterFontsState: initialfilterFontsStateState,
   dataState: [],
   uiState: initialUIState,
-  cachedFonts: []
+  cachedFonts: [],
+  selectedFontsState: []
 };

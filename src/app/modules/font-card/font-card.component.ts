@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input, Renderer2, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, Input,  ViewChild, ElementRef, OnInit } from '@angular/core';
 import { GooglefontsService } from '../../core/services/googlefonts.service';
 import { TextFiltersService } from '../../core/services/textFilters.service';
 import { Store } from '@ngrx/store';
@@ -24,7 +24,6 @@ export class FontCardComponent implements OnInit {
     private googlefontsService: GooglefontsService,
     private store: Store<AppState>,
     private textFiltersService: TextFiltersService,
-    private renderer: Renderer2
   ) {}
 
   @Input()
@@ -134,9 +133,6 @@ export class FontCardComponent implements OnInit {
         new AppActions.changeSampleText({ family: this.font.family, sampleText: word, sampleType: 'word' });
     }
   }
-  selectFont(font: SingleFont) {
-    this.store.dispatch(new AppActions.addToSelectedFonts(font));
-    this.store.dispatch(new AppActions.selectFontVariants({variant: 'regular', family:font.family}));
-    this.store.dispatch(new AppActions.selectLanguage({subset: 'latin', family: font.family}));
-  }
+
+
 }

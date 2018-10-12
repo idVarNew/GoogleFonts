@@ -1,32 +1,24 @@
 import { Action } from '@ngrx/store';
 import { SingleFont, UI } from '../../shared/models/font.model';
 
-export const LOAD_INITIAL_DATA = 'LOAD_INITIAL_DATA';
-export const SORTED_BY = 'SORTED_BY';
-export const CHANGE_FONT_SIZE = 'CHANGE_FONT_SIZE';
-export const LOAD_DATA = 'LOAD_DATA';
-export const USE_CUSTOM_TEXT_AS_SAMPLE = 'USE_CUSTOM_TEXT_AS_SAMPLE';
-export const SAMPLE_TEXT_TYPE = 'SAMPLE_TEXT_TYPE';
-export const ADD_TO_SELECTED_FONTS = 'ADD_TO_SELECTED_FONTS';
-export const REMOVE_SELECTED_FONT = 'REMOVE_SELECTED_FONT';
-export const SELECT_VARIANTS = 'SELECT_VARIANTS';
-export const SELECT_LANGUAGE = 'SELECT_LANGUAGE';
-export const APPLY_TO_ALL_FONTS = 'APPLY_TO_ALL_FONTS';
-export const TEXT_TYPE = 'TEXT_TYPE';
-export const CHANGE_ACTIVE_FONTS = 'CHANGE_ACTIVE_FONTS';
-export const CHANGE_VISIBLE_FONTS = 'CHANGE_VISIBLE_FONTS';
-export const RESET_SAMPLE_TEXT = 'RESET_SAMPLE_TEXT';
-export const SELECT_VARINAT_TO_PREVIEW = 'SELECT_VARINAT_TO_PREVIEW';
-export const GET_FONTS = 'GET_FONTS';
-
+export const LOAD_INITIAL_DATA = '[fonts] LOAD_INITIAL_DATA';
+export const GET_FONTS = '[fonts] GET_FONTS';
+export const LOAD_DATA = '[fonts] LOAD_DATA';
+export const USE_CUSTOM_TEXT_AS_SAMPLE = '[options] USE_CUSTOM_TEXT_AS_SAMPLE';
+export const RESET_SAMPLE_TEXT = '[options] RESET_SAMPLE_TEXT';
+export const CHANGE_FONT_SIZE = '[cart] CHANGE_FONT_SIZE';
+export const SET_SAMPLE_TEXT = '[cart] SET_SAMPLE_TEXT';
+export const APPLY_TO_ALL_FONTS = '[cart] APPLY_TO_ALL_FONTS';
+export const CHANGE_ACTIVE_FONTS = '[cart] CHANGE_ACTIVE_FONTS';
+export const SELECT_VARINAT_TO_PREVIEW = '[cart] SELECT_VARINAT_TO_PREVIEW';
+export const ADD_TO_SELECTED_FONTS = '[shared_button] ADD_TO_SELECTED_FONTS';
+export const REMOVE_SELECTED_FONT = '[shared_button] REMOVE_SELECTED_FONT';
+export const SELECT_VARIANTS = '[selected] SELECT_VARIANTS';
+export const DESELECT_VARIANTS = '[selected] DESELECT_VARIANTS';
+export const SELECT_LANGUAGE = '[selected] SELECT_LANGUAGE';
 
 export class loadInitialData implements Action {
   readonly type = LOAD_INITIAL_DATA;
-}
-
-export class sortFonts implements Action {
-  readonly type = SORTED_BY;
-  constructor(public sortedBy: string) {}
 }
 
 export class changeFontSize implements Action {
@@ -45,11 +37,11 @@ export class useCustomTextAsSample implements Action {
 }
 
 export class changeSampleText implements Action {
-  readonly type = SAMPLE_TEXT_TYPE;
+  readonly type = SET_SAMPLE_TEXT;
   constructor(public payload: { family: string; sampleText: string; sampleType: string }) {}
 }
 
-export class addToSelectedFonts implements Action {
+export class addToSelected implements Action {
   readonly type = ADD_TO_SELECTED_FONTS;
   constructor(public payload: SingleFont) {}
 }
@@ -61,6 +53,10 @@ export class removeFromSelectedFonts implements Action {
 
 export class selectFontVariants implements Action {
   readonly type = SELECT_VARIANTS;
+  constructor(public payload: { variant: string; family: string }) {}
+}
+export class deselectFontVariants implements Action {
+  readonly type = DESELECT_VARIANTS;
   constructor(public payload: { variant: string; family: string }) {}
 }
 
@@ -79,13 +75,6 @@ export class changeActiveFonts implements Action {
   constructor(public payload: string) {}
 }
 
-
-/*
-export class changeVisibleFonts implements Action {
-  readonly type = CHANGE_VISIBLE_FONTS;
-  constructor(public payload: string) {}
-}
-*/
 export class resetSampleText implements Action {
   readonly type = RESET_SAMPLE_TEXT;
 }
@@ -94,31 +83,23 @@ export class selectVariantToPreview implements Action {
   readonly type = SELECT_VARINAT_TO_PREVIEW;
   constructor(public payload: { family; weight; style }) {}
 }
-/*
-export class filterNumberOfStyles implements Action {
-  readonly type = FILTER_NUMBER_OF_STYLES;
-  constructor(public payload) {}
-}
-*/
+
 export class getFonts implements Action {
   readonly type = GET_FONTS;
 }
-
 
 export type DataActions =
   | changeFontSize
   | loadData
   | useCustomTextAsSample
   | changeSampleText
-  | addToSelectedFonts
   | removeFromSelectedFonts
   | selectFontVariants
   | selectLanguage
   | applyToAllFonts
   | changeActiveFonts
-//  | changeVisibleFonts
   | resetSampleText
   | selectVariantToPreview
- // | filterNumberOfStyles
   | getFonts
-
+  | addToSelected
+  | deselectFontVariants;

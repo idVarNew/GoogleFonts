@@ -7,5 +7,6 @@
 <app-generated-links *ngIf="selectedFonts.length >0" [cssImportCode]="cssImportCode" [cssLink]="cssLink" [selectedFonts]="selectedFonts"></app-generated-links>
 
 <app-customize-settings *ngIf="selectedFonts.length>0" [selectedFonts]="selectedFonts" (selectVariantEE)="selectVariant($event)" [selectedLangSubsets]="selectedLangSubsets"
-  [subsets]="subsets" (selectSubsetEE)="selectSubset($event)" (removeFromSelectedFontsEE)="removeFromSelectedFonts($event)">
+  [subsets]="subsets" (selectSubsetEE)="selectSubset($event)" (removeFromSelectedFontsEE)="removeFromSelectedFonts($event)"
+   (deselectVariantEE)="deselectVariant($event)">
 </app-customize-settings>

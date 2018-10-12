@@ -1,10 +1,10 @@
 import { Action } from '@ngrx/store';
 
-export const FILTER_CATEGORIES = 'FILTER_CATEGORIES';
-export const SORT_FONTS = 'SORT_FONTS';
-export const FILTER_LANGUAGES = 'FILTER_LANGUAGES';
-export const SEARCH_FONTS = 'SEARCH_FONTS';
-export const FILTER_NUMBER_OF_STYLES = 'FILTER_NUMBER_OF_STYLES';
+export const FILTER_CATEGORIES = '[filters] FILTER_CATEGORIES';
+export const SORT_FONTS = '[filters] SORT_FONTS';
+export const FILTER_LANGUAGES = '[filters] FILTER_LANGUAGES';
+export const SEARCH_FONTS = '[filters] SEARCH_FONTS';
+export const FILTER_NUMBER_OF_STYLES = '[filters] FILTER_NUMBER_OF_STYLES';
 
 
 export class filterByCategory implements Action {

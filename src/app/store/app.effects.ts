@@ -18,7 +18,7 @@ export class Effects {
   @Effect()
   getGoogleGonts$ = this.actions$.pipe(
     ofType(AppActions.LOAD_INITIAL_DATA),
-    withLatestFrom(this.store.select('filterFonts'), (action, state) => state),
+    withLatestFrom(this.store.select('filterFontsState'), (action, state) => state),
     switchMap(state =>
       this.googlefontsService.getFonts(`&sort=${state.sorting}`, state.category, state.language).pipe(
         map((data: any) => {
@@ -36,12 +36,11 @@ export class Effects {
       AppActions.GET_FONTS,
       AppActions.FILTER_LANGUAGES,
       AppActions.SORT_FONTS,
-      AppActions.SORTED_BY,
       AppActions.IS_NUMBER_OF_STYLES_CHECKED,
       AppActions.CHANGE_FONT_SIZE,
       AppActions.SELECT_SUBSET,
       AppActions.USE_CUSTOM_TEXT_AS_SAMPLE,
-      AppActions.SAMPLE_TEXT_TYPE,
+      AppActions.SET_SAMPLE_TEXT,
       AppActions.SEARCH_FONTS
     ),
     tap(() => {
@@ -52,21 +51,21 @@ export class Effects {
   @Effect()
   getFilteredFonts$ = this.actions$.pipe(
     ofType(
-      AppActions.GET_FONTS,
+     AppActions.GET_FONTS,
       AppActions.FILTER_LANGUAGES,
       AppActions.SORT_FONTS,
       AppActions.FILTER_NUMBER_OF_STYLES
     ),
     withLatestFrom(this.store, (action, state: AppState) => state),
     switchMap((store: AppState) => {
-      const cachedFonts: Array<SingleFont> = store['cacheFonts'];
+      const cachedFonts: Array<SingleFont> = store['cacheFontsState'];
 
       return this.googlefontsService
         .getFonts(
-          `&sort=${store.filterFonts.sorting}`,
-          store.filterFonts.category,
-          store.filterFonts.language,
-          store.filterFonts.styles
+          `&sort=${store.filterFontsState.sorting}`,
+          store.filterFontsState.category,
+          store.filterFontsState.language,
+          store.filterFontsState.styles
         )
         .pipe(
           map((data: Array<SingleFont>) => {
@@ -92,9 +91,9 @@ export class Effects {
       return { action, state };
     }),
     switchMap(store => {
-      const cachedFonts: Array<SingleFont> = store.state['cacheFonts'];
-
-      return this.googlefontsService.getFonts(`&sort=${'all'}`, 'all', 'latin').pipe(
+      const cachedFonts: Array<SingleFont> = store.state['cacheFontsState'];
+  
+      return this.googlefontsService.getFonts(`&sort=${'alpha'}`, 'all', 'latin').pipe(
         map((data: Array<SingleFont>) => {
           const fonts = data.filter((font: SingleFont) => {
             const family: string = font.family.toLowerCase();

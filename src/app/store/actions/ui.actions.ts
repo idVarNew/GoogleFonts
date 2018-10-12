@@ -1,11 +1,11 @@
 import { Action } from '@ngrx/store';
 
-export const SELECT_SUBSET = 'SELECT_SUBSET';
-export const DESELECT_SUBSET = ' DESELECT_SUBSET';
-export const LOAD_MORE_FONTS = 'LOAD_MORE_FONTS';
-export const IS_NUMBER_OF_STYLES_CHECKED = 'IS_NUMBER_OF_STYLES_CHECKED';
-export const IS_CHANGES_MADE = 'IS_CHANGES_MADE';
-export const RESET_ALL_FONTS_SETTINGS = 'RESET_ALL_FONTS_SETTINGS';
+export const SELECT_SUBSET = '[ui] SELECT_SUBSET';
+export const DESELECT_SUBSET = '[ui] DESELECT_SUBSET';
+export const LOAD_MORE_FONTS = '[ui] LOAD_MORE_FONTS';
+export const IS_NUMBER_OF_STYLES_CHECKED = '[ui] IS_NUMBER_OF_STYLES_CHECKED';
+export const IS_CHANGES_MADE = '[ui] IS_CHANGES_MADE';
+export const RESET_ALL_FONTS_SETTINGS = '[ui] RESET_ALL_FONTS_SETTINGS';
 
 export class loadMoreFonts implements Action {
   readonly type = LOAD_MORE_FONTS;

@@ -70,10 +70,5 @@ export class FontdetailsComponent implements OnInit {
     this.fontStyles = this.googlefontsService.getStyles(this.font);
     this.fontWeights = this.googlefontsService.getWeights(this.font);
   }
-
-  selectFont(font: SingleFont) {
-    this.store.dispatch(new AppActions.addToSelectedFonts(font));
-    this.store.dispatch(new AppActions.selectFontVariants({variant: 'regular', family: font.family}));
-    this.store.dispatch(new AppActions.selectLanguage({subset: 'latin', family:font.family}));
-  }
+ 
 }

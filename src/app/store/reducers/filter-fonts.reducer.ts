@@ -2,7 +2,7 @@ import * as AppActions from '../actions';
 import { Filtered } from '../../shared/models/font.model';
 import { State } from '../app.state';
 
-export function FilterFonts(state: Filtered = State.filterFonts, action: AppActions.ActionsFilter): Filtered {
+export function filterFontsState(state: Filtered = State.filterFontsState, action: AppActions.ActionsFilter): Filtered {
   switch (action.type) {
     case AppActions.FILTER_CATEGORIES:
       return {

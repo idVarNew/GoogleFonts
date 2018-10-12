@@ -12,11 +12,18 @@ export class SelectedVariantsComponent {
   @Output()
   selectVariantEE = new EventEmitter<{ font: SingleFont; variant: string }>();
   @Output()
+  deselectVariantEE = new EventEmitter<{ font: SingleFont; variant: string }>();
+  @Output()
   removeFromSelectedFontsEE = new EventEmitter<string>();
 
-  selectVariant(font: SingleFont, variant: string) {
-    this.selectVariantEE.emit({ font, variant });
-  }
+
+  selectVariant(font: SingleFont, variant: string, event) {
+    if(event.target.checked){
+      this.selectVariantEE.emit({ font, variant });
+    }else{
+      this.deselectVariantEE.emit({ font, variant });
+    }
+     }
 
   removeFromSelectedFonts(family: string) {
     this.removeFromSelectedFontsEE.emit(family);

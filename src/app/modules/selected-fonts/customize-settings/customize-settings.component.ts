@@ -19,15 +19,21 @@ export class CustomizeSettingsComponent {
   selectSubsetEE = new EventEmitter<{ subset: string; event: string }>();
   @Output()
   removeFromSelectedFontsEE = new EventEmitter<string>();
+  @Output()
+  deselectVariantEE = new EventEmitter<any>();
+
 
   selectVariant(event: { font: SingleFont; variant: string }) {
     this.selectVariantEE.emit({ font: event.font, variant: event.variant });
   }
+  deselectVariant(event: { font: SingleFont; variant: string }){
+    this.deselectVariantEE.emit({ font: event.font, variant: event.variant })
+    }
 
   selectSubset(event: { subset: string; event: string }) {
     this.selectSubsetEE.emit({ subset: event.subset, event: event.event });
   }
-
+ 
   removeFromSelectedFonts(family: string) {
     this.removeFromSelectedFontsEE.emit(family);
   }

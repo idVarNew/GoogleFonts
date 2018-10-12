@@ -41,7 +41,7 @@ export class FontsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.select('filterFonts').subscribe((store):void => {
+    this.store.select('filterFontsState').subscribe((store):void => {
         this.filters = store
         this.textFiltersService.convertSortingType(store.sorting);
       }

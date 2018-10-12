@@ -44,30 +44,21 @@ export class FiltersComponent implements OnInit {
       this.path = this.location.path();
     });
 
+    this.store.pipe(select('selectedFontsState')).subscribe((state) => {
+      this.selectedFonts = state;
+     });
+ 
+
     this.store.pipe(select('uiState')).subscribe((state: UI) => {
       this.isChangesMade = state.isChangesMade;
       this.isNumberOfStylesChecked = state.isNumberOfStylesChecked;
     });
 
-    this.store.pipe(select('filterFonts')).subscribe(state => {
+    this.store.pipe(select('filterFontsState')).subscribe(state => {
       this.selectedCategory = state.category;
       this.defaultLanguage = state.language;
       this.sorting = state.sorting;
     });
-
-    this.store.pipe(select('dataState'))
-      .pipe(
-        map((fonts: Array<SingleFont>) => {
-          return fonts.filter((font: SingleFont) => {
-            if (font.currentState.selected === true) {
-              return font;
-            }
-          });
-        })
-      )
-      .subscribe((fonts: Array<SingleFont>) => {
-        this.selectedFonts = fonts;
-      });
   }
 
   sortFonts(key: string) {
@@ -94,10 +85,10 @@ export class FiltersComponent implements OnInit {
   }
 
   removeFromSelectedFonts(family: string) {
-    this.store.dispatch(new AppActions.removeFromSelectedFonts(family));
+   this.store.dispatch(new AppActions.removeFromSelectedFonts(family));
   }
 
-  clearAllSelectedFonts() {
+  clearAllSelectedFonts() {    
     this.store.dispatch(new AppActions.removeFromSelectedFonts(null));
   }
 

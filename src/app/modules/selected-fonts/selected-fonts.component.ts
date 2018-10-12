@@ -28,20 +28,12 @@ export class SelectedFontsComponent implements OnInit {
       this.path = this.location.path();
     });
 
-    this.store
-      .select('dataState')
-      .pipe(
-        map((fonts: Array<SingleFont>) => {
-          return fonts.filter((font: SingleFont) => {
-            return font.currentState.selected === true;
-          });
-        })
-      )
-      .subscribe((fonts: Array<SingleFont>) => {
-        this.selectedFonts = fonts;
-      });
+    this.store.pipe(select('selectedFontsState')).subscribe(state => {
+      this.selectedFonts = state;
+      this.generateLink();
+    });
 
-    this.generateLink();
+   
   }
 
   removeFromSelectedFonts(family: string): void {
@@ -49,12 +41,13 @@ export class SelectedFontsComponent implements OnInit {
     this.generateLink();
   }
 
-  generateLink(): void {
+  generateLink() {
     const languages = this.generateLanguages(),
       fontsVariants = this.generateVariants();
 
     this.cssLink = `<link href="https://fonts.googleapis.com/css?family${fontsVariants}${languages} " rel="stylesheet">`;
     this.cssImportCode = `@import url('https://fonts.googleapis.com/css?family${fontsVariants}${languages}')`;
+ 
   }
 
   generateLanguages(): string {
@@ -86,13 +79,14 @@ export class SelectedFontsComponent implements OnInit {
 
     this.selectedFonts.forEach((font: SingleFont) => {
       const allSelectedVariants: Array<string> = font.variants.filter((variant: string) => {
+      
         return font.currentState.selectedVariants[variant] === true;
       });
 
       if (allSelectedVariants.length > 0) {
         fontsVariants = fontsVariants + '|' + font.family + ':';
       }
-
+     
       font.variants.forEach((variant: string) => {
         if (font.currentState.selectedVariants[variant] === true) {
           fontsVariants = fontsVariants + variant + ',';
@@ -107,7 +101,7 @@ export class SelectedFontsComponent implements OnInit {
     if (fontsVariants[fontsVariants.length - 1] === ',' || fontsVariants[fontsVariants.length - 1] === ':') {
       fontsVariants = fontsVariants.substring(0, fontsVariants.length - 1);
     }
-
+   
     return fontsVariants;
   }
 
@@ -122,8 +116,12 @@ export class SelectedFontsComponent implements OnInit {
     this.generateLink();
   }
 
+  deselectVariant(event): void{
+    this.store.dispatch(new AppActions.deselectFontVariants({ variant: event.variant, family: event.font.family }));
+    this.generateLink();
+  }
   selectVariant(event): void {
-    this.store.dispatch(new AppActions.selectFontVariants({variant: event.variant, family: event.font.family}));
+    this.store.dispatch(new AppActions.selectFontVariants({ variant: event.variant, family: event.font.family }));
     this.generateLink();
   }
 }
